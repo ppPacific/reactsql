@@ -8,7 +8,7 @@ const db = mysql.createConnection({
     password: "",
     database: "test",
 });
-
+app.use(express.json());
 app.get("/", (req, res) => {
     res.json("this is reactsql backend");
 });
