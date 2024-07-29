@@ -1,18 +1,17 @@
-import {Grid} from "@mantine/core";
+import Column from "../components/column/Column.tsx";
+import {Button} from "@mantine/core";
 
 
 const Board =()=>{
 
     return (
-
-            <Grid grow gutter="sm">
-                <Grid.Col span={4} className={"bg-yellow-400"}>1</Grid.Col>
-                <Grid.Col span={4}>2</Grid.Col>
-                <Grid.Col span={4}>3</Grid.Col>
-                <Grid.Col span={4}>4</Grid.Col>
-                <Grid.Col span={4}>5</Grid.Col>
-            </Grid>
-
+            <div className={"min-w-full p-2 flex flex-row gap-3"}>
+                <Column name={"TEST1"}>
+                    <Button className={"rounded-xl bg-gray-800 p-2 text-white"}>Test Click!</Button>
+                    {/*<Button className={"rounded-xl bg-gray-800 p-2 text-white"}>Test Click!</Button>*/}
+                </Column>
+                <Column name={"TEST2"}>{""}</Column>
+            </div>
     )
 }
 
