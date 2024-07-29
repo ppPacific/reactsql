@@ -6,6 +6,7 @@ const Column =({children,name,className}:{children?:any; name: string;className?
 
     return (
         <Grid grow gutter="sm">
+            {/*map children? each col*/}
             <Grid.Col
                 span={12}
                 className={"bg-gray-200 min-w-56 min-h-24 p-2"}
