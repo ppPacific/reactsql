@@ -1,7 +1,7 @@
 import {ColumnTypes} from "./enums.ts";
 
 export interface WidgetProps {
-    id: number;
+    id: string;
     title: string;
     column: ColumnTypes;
 }
