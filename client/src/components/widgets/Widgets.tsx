@@ -3,11 +3,15 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faFileLines} from "@fortawesome/free-solid-svg-icons";
 
 
-const Widgets =({children,name,className}:{children?:any; name: string;className?:string})=>{
+const Widgets =({index,children,name,className,setActiveCard}:{index?:string;children?:any; name: string;className?:string;setActiveCard:(type:any)=>void})=>{
 
 
     return (
-        <div className={clsx(className,"p-2")}>
+        <div
+            draggable
+            onDragStart={()=>setActiveCard(index)}
+            onDragEnd={()=>setActiveCard(null)}
+            className={clsx(className,"p-2")}>
             <span><FontAwesomeIcon icon={faFileLines} />{name}</span>
             {children}
         </div>

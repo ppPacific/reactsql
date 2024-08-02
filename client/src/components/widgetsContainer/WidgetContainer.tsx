@@ -2,7 +2,7 @@ import clsx from "clsx";
 import {Button, Text} from "@mantine/core";
 
 
-const WidgetContainer =({children,name,className,type,setActiveCard}:{children?:any; name?: string;className?:string;type:string;setActiveCard:(type:any)=>void})=>{
+const WidgetContainer =({index,children,name,className,type,setActiveCard}:{index?:string;children?:any; name?: string;className?:string;type:string;setActiveCard:(type:any)=>void})=>{
     const defaultButtonStyle = "rounded-xl bg-gray-800 p-2 text-white";
 
     const getWidget =(type:string)=>{
@@ -27,7 +27,8 @@ const WidgetContainer =({children,name,className,type,setActiveCard}:{children?:
     return (
         <div
             draggable
-            onDragStart={()=>setActiveCard}
+            onDragStart={()=>setActiveCard(index)}
+            onDragEnd={()=>setActiveCard(null)}
             className={clsx(className,"flex justify-center w-full p-2")}>
             <span>{name}</span>
             {getWidget(type)}
