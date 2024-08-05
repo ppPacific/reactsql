@@ -2,7 +2,7 @@ import clsx from "clsx";
 import {Button, Text} from "@mantine/core";
 
 
-const WidgetContainer =({index,children,name,className,type,setActiveCard}:{index?:string;children?:any; name?: string;className?:string;type:string;setActiveCard:(type:any)=>void})=>{
+const WidgetContainer =({index,children,name,className,type,setActiveCard}:{index?:number;children?:any; name?: string;className?:string;type:string;setActiveCard:(type:any)=>void})=>{
     const defaultButtonStyle = "rounded-xl bg-gray-800 p-2 text-white";
 
     const getWidget =(type:string)=>{
