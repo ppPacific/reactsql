@@ -29,35 +29,45 @@ const Board =()=>{
     const [orders, setOrders] = useState<any[] | undefined>([]);
     const [selected, setSelected] = useState<any[] | undefined>([]);
     const [activeCard, setActiveCard] = useState<any | null>(null);
+    const [activeWidget, setActiveWidget] = useState<any | null>(null);
 
     useEffect(() => {
         setOrders(wids);
     }, []);
     useEffect(() => {
         setSelected(defaultSelected);
+        setActiveCard(0);
     }, []);
-    // const columnItem = (columnName: string) => {
-    //     return (
-    //         orders &&
-    //         orders
-    //             .filter((order) => order.column === columnName)
-    //             .map((order, index) => (
-    //                 <Cards
-    //                     key={order.id}
-    //                     name={order.title}
-    //                     material={order.material}
-    //                     setOrders={setOrders}
-    //                     index={index}
-    //                 />
-    //             ))
-    //     );
-    // };
+
+    const widgetToSelected = (type:string)=>{
+        return {type:type,column:"1"};
+    }
     const onDragAdd =(status:string,position:number)=>{
         console.log(`${activeCard} is dragging to ${status} at ${position}`);
-        if(activeCard===null || activeCard ===undefined) return;
+        if(activeCard === null || activeCard === undefined) return;
+        //if(activeWidget === null || activeWidget === undefined) return;
+        const selectToMove = selected![activeCard];
+
+        if(activeWidget!==null && activeWidget!==undefined){
+
+            const widgetToAdd = orders![activeWidget];
+            console.log(widgetToAdd);
+            //TODO: column or row
+            const updatedTemp = selected?.splice(position, 0 ,widgetToSelected(widgetToAdd.title));
+            setSelected(updatedTemp);
+        } else {
+
+        }
+        //TODO: case for empty template
+        console.log(activeWidget);
+        const updated = selected?.filter((item,index)=>index!== activeCard);
+        updated!.splice(position,0, { ...selectToMove });
+        setSelected(updated);
+
     }
     const ref1 = "https://react-email-editor-demo.netlify.app/";
     const ref2 = "https://github.com/topics/email-editor";
+
     return (
         <>
             <div className={"p-1 bg-gray-400 text-black text-sm flex gap-4"}>
@@ -72,7 +82,7 @@ const Board =()=>{
                         return <React.Fragment key={`${item.type}-${index}`}>
                             <WidgetContainer
                             setActiveCard={setActiveCard}
-                            index={`selected ${index}`}
+                            index={index}
                             type={item.type}
                             className={"hover:border-[1px] hover:border-purple-600"}>
                         </WidgetContainer>
@@ -85,14 +95,15 @@ const Board =()=>{
                     {orders?.map((item, index) => {
                         return <Widgets
                             key={item.id}
-                            setActiveCard={setActiveCard}
-                            index={`widget ${index}`}
+                            setActiveWidget={setActiveWidget}
+                            index={index}
                             name={item.title}
                             className={"bg-gray-300 rounded-md"}></Widgets>
                     })}
                 </Column>
             </div>
             <h2>Active Card - {activeCard}</h2>
+            <h2>Active Widget - {activeWidget}</h2>
             <pre className="text-xs">
                 <p>{JSON.stringify(selected, null, 4)}</p>
             </pre>
